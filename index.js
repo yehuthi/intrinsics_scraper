@@ -58,7 +58,7 @@ async function main() {
 		if (intrinsic.sequence === "TRUE")
 			intrinsic.sequence = true;
 		// normalize categories
-		if (!Array.isArray(intrinsic.category))
+		if (intrinsic.category && !Array.isArray(intrinsic.category))
 			intrinsic.category = [intrinsic.category];
 		// normalize instructions
 		if (intrinsic.instruction && !Array.isArray(intrinsic.instruction))
