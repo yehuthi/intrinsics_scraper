@@ -49,10 +49,14 @@ async function main() {
 	data.intrinsics = data.intrinsic;
 	delete data.intrinsic;
 
-	// normalize parameters
+	// normalization
 	data.intrinsics.forEach(intrinsic => {
+		// normalize parameters
 		if (intrinsic.parameter != undefined && !Array.isArray(intrinsic.parameter))
 			intrinsic.parameter = [intrinsic.parameter];
+		// normalize sequence
+		if (intrinsic.sequence === "TRUE")
+			intrinsic.sequence = true;
 	});
 
 	// typescript gen
