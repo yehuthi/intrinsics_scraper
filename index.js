@@ -2,11 +2,13 @@ import { XMLParser } from "fast-xml-parser";
 import * as node_util from "util";
 import { isatty } from "node:tty";
 import * as process from "node:process";
+import json2ts from "json-to-ts";
 
 async function main() {
 	// CLI args
 	const args = process.argv.slice(2);
 	let pretty_print = null;
+	let typescript_gen = false;
 
 	for (const arg of args) {
 		if (arg.startsWith("--pretty") || arg === "-p") {
@@ -23,6 +25,8 @@ async function main() {
 					pretty_print = null;
 					break;
 			}
+		} else if (arg === "--typescript") {
+			typescript_gen = true;
 		}
 		else console.warn(`unrecognized CLI argument "${arg}"`);
 	}
@@ -43,20 +47,31 @@ async function main() {
 	data = data.intrinsics_list;
 	data.intrinsics = data.intrinsic;
 	delete data.intrinsic;
+
+	// typescript gen
+	if (typescript_gen) {
+		data = json2ts(data, { rootName: "Intrinsics", useTypeAlias: true})
+			.join("\n");
+	}
+
 	// print
-	if (pretty_print) {
-		console.log(node_util.inspect(
-			data,
-			{
-				colors: true,
-				depth: null,
-				showHidden: false,
-				maxArrayLength: Infinity,
-				maxStringLength: Infinity,
-			},
-		));
-	} else
-		console.log(JSON.stringify(data));
+	if (typescript_gen)
+		console.log(data);
+	else {
+		if (pretty_print) {
+			console.log(node_util.inspect(
+				data,
+				{
+					colors: true,
+					depth: null,
+					showHidden: false,
+					maxArrayLength: Infinity,
+					maxStringLength: Infinity,
+				},
+			));
+		} else
+			console.log(JSON.stringify(data));
+	}
 }
 
 main();
