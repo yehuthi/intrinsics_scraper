@@ -60,6 +60,9 @@ async function main() {
 		// normalize categories
 		if (!Array.isArray(intrinsic.category))
 			intrinsic.category = [intrinsic.category];
+		// normalize instructions
+		if (intrinsic.instruction && !Array.isArray(intrinsic.instruction))
+			intrinsic.instruction = [intrinsic.instruction];
 	});
 
 	// typescript gen
