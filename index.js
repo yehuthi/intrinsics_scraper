@@ -49,6 +49,12 @@ async function main() {
 	data.intrinsics = data.intrinsic;
 	delete data.intrinsic;
 
+	// normalize parameters
+	data.intrinsics.forEach(intrinsic => {
+		if (intrinsic.parameter != undefined && !Array.isArray(intrinsic.parameter))
+			intrinsic.parameter = [intrinsic.parameter];
+	});
+
 	// typescript gen
 	if (typescript_gen) {
 		data = json2ts(data, { rootName: "Intrinsics", useTypeAlias: true})
