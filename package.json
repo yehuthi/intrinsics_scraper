@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cli-highlight": "^2.1.11",
     "fast-xml-parser": "^4.5.0",
     "json-to-ts": "^2.1.0"
   }

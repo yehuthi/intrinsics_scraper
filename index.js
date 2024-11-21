@@ -3,6 +3,7 @@ import * as node_util from "util";
 import { isatty } from "node:tty";
 import * as process from "node:process";
 import json2ts from "json-to-ts";
+import { highlight } from "cli-highlight";"cli-highlight"
 
 async function main() {
 	// CLI args
@@ -55,8 +56,11 @@ async function main() {
 	}
 
 	// print
-	if (typescript_gen)
+	if (typescript_gen) {
+		if (pretty_print)
+			data = highlight(data, { language: "typescript" });
 		console.log(data);
+	}
 	else {
 		if (pretty_print) {
 			console.log(node_util.inspect(
