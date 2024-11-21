@@ -3,7 +3,6 @@ import * as node_util from "util";
 import { isatty } from "node:tty";
 import * as process from "node:process";
 
-
 async function main() {
 	// CLI args
 	const args = process.argv.slice(2);
