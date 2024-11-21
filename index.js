@@ -57,6 +57,9 @@ async function main() {
 		// normalize sequence
 		if (intrinsic.sequence === "TRUE")
 			intrinsic.sequence = true;
+		// normalize categories
+		if (!Array.isArray(intrinsic.category))
+			intrinsic.category = [intrinsic.category];
 	});
 
 	// typescript gen
