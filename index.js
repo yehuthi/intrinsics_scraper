@@ -3,7 +3,7 @@ import * as node_util from "util";
 import { isatty } from "node:tty";
 import * as process from "node:process";
 import json2ts from "json-to-ts";
-import { highlight } from "cli-highlight";"cli-highlight"
+import { highlight } from "cli-highlight";
 
 async function main() {
 	// CLI args
